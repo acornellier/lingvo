@@ -1,17 +1,20 @@
 import React, {Component} from 'react'
 import './App.css'
+import {connect} from 'react-redux'
 import {send} from './websocket'
-import {Grid, Form, Segment} from 'semantic-ui-react'
+import {Grid, Form} from 'semantic-ui-react'
 
-const languages = [
-  {value: 'en', text: 'English'},
-  {value: 'es', text: 'Spanish'}
-]
+const detect_lang = {value: 'detect', text: 'Detect'}
 
 class App extends Component {
   constructor() {
     super()
-    this.state = {from: languages[0].value, to: languages[1].value, text: ''}
+    this.state = {
+      from: 'en',
+      to: 'es',
+      text: 'apple',
+      rows: 1
+    }
 
     this.onSubmit = this.onSubmit.bind(this)
   }
@@ -24,20 +27,23 @@ class App extends Component {
   }
 
   render() {
+    const {languages} = this.props
     const {from, to, text} = this.state
+
+    const options = languages.concat([detect_lang])
 
     return (
       <Form onSubmit={this.onSubmit}>
         <Grid>
           <Grid.Column width={8}>
             <Form.Group>
-              <Form.Dropdown selection options={languages} value={from} name='from' onChange={this.onChange}/>
+              <Form.Dropdown selection options={options} value={from} name='from' onChange={this.onChange}/>
               <Form.Button type='submit'>Submit</Form.Button>
             </Form.Group>
             <Form.TextArea value={text} name='text' onChange={this.onChange}/>
           </Grid.Column>
           <Grid.Column width={8}>
-            <Form.Dropdown selection options={languages} value={to} name='to' onChange={this.onChange}/>
+            <Form.Dropdown selection options={options} value={to} name='to' onChange={this.onChange}/>
             <Form.TextArea id='target'/>
           </Grid.Column>
         </Grid>
@@ -46,4 +52,6 @@ class App extends Component {
   }
 }
 
-export default App
+export default connect(
+  state => ({languages: state.languages})
+)(App)

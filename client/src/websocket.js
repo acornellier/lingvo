@@ -1,11 +1,19 @@
+import {receiveLanguages} from "./reducers/root"
+
 let ws
 
-export const initWebsocket = () => {
+export const initWebsocket = (store) => {
   ws = new WebSocket("ws://localhost:3002")
+
   window.onbeforeunload = () => ws.close()
 
   ws.onmessage = msg => {
-    document.getElementById('target').value = JSON.parse(msg.data)
+    const data = JSON.parse(msg.data)
+    switch (data.type) {
+      case 'languages':
+        store.dispatch(receiveLanguages(data.data))
+        break
+    }
   }
 }
 
