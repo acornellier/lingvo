@@ -6,9 +6,7 @@ const configureStore = () => {
   const store = createStore(rootReducer)
 
   if (module.hot) {
-    module.hot.accept('./reducers', () => {
-      store.replaceReducer(rootReducer)
-    })
+    module.hot.accept()
   }
 
   return store

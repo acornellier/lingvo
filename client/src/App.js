@@ -27,7 +27,7 @@ class App extends Component {
   }
 
   render() {
-    const {languages} = this.props
+    const {languages, translation} = this.props
     const {from, to, text} = this.state
 
     const options = languages.concat([detect_lang])
@@ -44,7 +44,7 @@ class App extends Component {
           </Grid.Column>
           <Grid.Column width={8}>
             <Form.Dropdown selection options={options} value={to} name='to' onChange={this.onChange}/>
-            <Form.TextArea id='target'/>
+            <Form.TextArea id='target' value={translation}/>
           </Grid.Column>
         </Grid>
       </Form>
@@ -53,5 +53,8 @@ class App extends Component {
 }
 
 export default connect(
-  state => ({languages: state.languages})
+  state => ({
+    languages: state.languages,
+    translation: state.translation
+  })
 )(App)
