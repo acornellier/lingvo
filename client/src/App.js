@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import './App.css'
+import {send} from './websocket'
 import {Grid, Form, Segment} from 'semantic-ui-react'
 
 const languages = ['English', 'Spanish']
@@ -7,7 +8,7 @@ const languages = ['English', 'Spanish']
 class App extends Component {
   constructor() {
     super()
-    this.state = {l1: languages[0], c1: '', l2: languages[1], c2: ''}
+    this.state = {source: languages[0], target: languages[1], data: ''}
 
     this.onSubmit = this.onSubmit.bind(this)
   }
@@ -15,24 +16,25 @@ class App extends Component {
   onChange = (e, {name, value}) => this.setState({[name]: value})
 
   onSubmit() {
-    console.warn(this.state)
-  }'AIzaSyDkVPafLTgpUMBLeeU9rFxkADBqOwqKN88'
+    const {source, target, data} = this.state
+    send({source, target, q: data, format: 'text'})
+  }
 
   render() {
-    const {l1, c1, l2, c2} = this.state
+    const {source, target, data} = this.state
     const options = languages.map(l => ({value: l, text: l}))
 
     return (
       <Form onSubmit={this.onSubmit}>
         <Grid>
           <Grid.Column width={8}>
-            <Form.Dropdown options={options} value={l1} name='l1' onChange={this.onChange}/>
-            <Form.TextArea value={c1} name='c1' onChange={this.onChange}/>
+            <Form.Dropdown options={options} value={source} name='source' onChange={this.onChange}/>
+            <Form.TextArea value={data} name='data' onChange={this.onChange}/>
           </Grid.Column>
           <Grid.Column width={8}>
-            <Form.Dropdown options={options} value={l2} name='l2' onChange={this.onChange}/>
+            <Form.Dropdown options={options} value={target} name='target' onChange={this.onChange}/>
             <Segment>
-              {c2}
+              {''}
             </Segment>
           </Grid.Column>
         </Grid>
