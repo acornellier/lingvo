@@ -1,14 +1,14 @@
 const initialState = {
   languages: [],
-  translation: ''
+  translations: ''
 }
 
 export const receiveLanguages = (languages) => ({
   type: 'languages', languages
 })
 
-export const receiveTranslation = (translation) => ({
-  type: 'translation', translation
+export const receiveTranslations = (translations) => ({
+  type: 'translations', translations
 })
 
 const root = (state = initialState, action) => {
@@ -18,9 +18,9 @@ const root = (state = initialState, action) => {
       return Object.assign({}, state, {
         languages: action.languages
       })
-    case 'translation':
+    case 'translations':
       return Object.assign({}, state, {
-        translation: action.translation
+        translations: action.translations
       })
   }
   return state

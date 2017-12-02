@@ -1,4 +1,4 @@
-import {receiveLanguages, receiveTranslation} from "./reducers/root"
+import {receiveLanguages, receiveTranslations} from "./reducers/root"
 
 let ws
 
@@ -14,8 +14,8 @@ export const initWebsocket = (store) => {
       case 'languages':
         store.dispatch(receiveLanguages(data.data))
         break
-      case 'translation':
-        store.dispatch(receiveTranslation(data.data))
+      case 'translations':
+        store.dispatch(receiveTranslations(data.data))
         break
     }
   }

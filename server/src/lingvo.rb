@@ -35,8 +35,10 @@ EventMachine.run do
     ws.onmessage do |msg|
       data = JSON.parse(msg)
       puts "Received Message: #{data}"
-      translation = translate.translate data['text'], to: data['to'], from: data['from']
-      ws_send ws, 'translation', translation
+      translations = data['to'].map do |to|
+        translate.translate data['text'], to: to, from: data['from']
+      end
+      ws_send ws, 'translations', translations
     end
   end
 
