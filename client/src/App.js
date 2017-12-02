@@ -16,10 +16,9 @@ class App extends Component {
 
   onSubmit() {
     console.warn(this.state)
-  }
+  }'AIzaSyDkVPafLTgpUMBLeeU9rFxkADBqOwqKN88'
 
   render() {
-    console.warn(this.state)
     const {l1, c1, l2, c2} = this.state
     const options = languages.map(l => ({value: l, text: l}))
 

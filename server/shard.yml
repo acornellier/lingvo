@@ -1,0 +1,17 @@
+name: lingvo
+version: 0.1.0
+
+authors:
+  - acornellier <acornellier@vigilantglobal.com>
+
+targets:
+  lingvo:
+    main: src/lingvo.cr
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+
+crystal: 0.23.1
+
+license: MIT
