@@ -1,5 +1,14 @@
 body {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: #f7f7f7;
+
+  display: flex;
+  justify-content: center;
+}
+
+#root {
+  padding-top: 100px;
+  width: 80%;
 }

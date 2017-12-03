@@ -1,7 +1,8 @@
 require 'thin'
 require 'sinatra/base'
 require 'em-websocket'
-require "google/cloud/translate"
+require 'google/cloud/translate'
+require 'htmlentities'
 
 translate = Google::Cloud::Translate.new project: 'translate-187816'
 
@@ -37,6 +38,8 @@ EventMachine.run do
       puts "Received Message: #{data}"
       translations = data['to'].map do |to|
         translate.translate data['text'], to: to, from: data['from']
+      end.map do |translation|
+        HTMLEntities.new.decode translation.text
       end
       ws_send ws, 'translations', translations
     end

@@ -27,6 +27,7 @@ GEM
       multi_json (~> 1.11)
       os (~> 0.9)
       signet (~> 0.7)
+    htmlentities (4.3.4)
     http_parser.rb (0.6.0)
     jwt (2.1.0)
     little-plugger (1.1.4)
@@ -68,6 +69,7 @@ PLATFORMS
 DEPENDENCIES
   em-websocket
   google-cloud-translate
+  htmlentities
   pry
   sinatra
   thin
