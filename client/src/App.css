@@ -1,0 +1,23 @@
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+#input {
+  display: flex;
+  justify-content: center;
+}
+
+#input .lang-container {
+  width: 50%;
+}
+
+#output {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.lang-container .field {
+  margin-bottom: 5px !important;
+}

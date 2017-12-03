@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import './App.css'
 import {connect} from 'react-redux'
 import {send} from './websocket'
-import {Grid, Form, TextArea} from 'semantic-ui-react'
+import {Form, TextArea, Divider} from 'semantic-ui-react'
 import _ from 'lodash'
 
 const detect_lang = {value: 'detect', text: 'Detect'}
@@ -48,25 +48,25 @@ class App extends Component {
 
     return (
       <Form onSubmit={() => this.onSubmit()}>
-        <Grid>
-          <Grid.Column width={8}>
-            <Form.Group>
-              <Form.Dropdown selection options={options}
+        <main>
+          <div id='input'>
+            <div className='lang-container'>
+              <Form.Dropdown selection search options={options}
                              value={from} name='from' onChange={this.onChangeFrom}/>
-              <Form.Button type='submit'>Submit</Form.Button>
-            </Form.Group>
-            <Form.TextArea name='text' onBlur={this.onChangeText} />
-          </Grid.Column>
-          <Grid.Column width={8}>
+              <Form.TextArea name='text' onBlur={this.onChangeText}/>
+            </div>
+          </div>
+          <Divider/>
+          <div id='output'>
             {_.range(rows).map(i =>
-              <div key={i}>
-                <Form.Dropdown selection options={options}
+              <div key={i} className='lang-container'>
+                <Form.Dropdown selection search options={options}
                                value={to[i]} name={i} onChange={this.onChangeTo}/>
                 <TextArea autoHeight id='target' value={translations[i]}/>
               </div>
             )}
-          </Grid.Column>
-        </Grid>
+          </div>
+        </main>
       </Form>
     )
   }
